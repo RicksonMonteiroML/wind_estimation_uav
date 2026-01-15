@@ -1,3 +1,4 @@
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[codz]
@@ -134,15 +135,25 @@ celerybeat.pid
 # SageMath parsed files
 *.sage.py
 
+
 # Environments
-.env
-.envrc
-.venv
-env/
+.venv/
 venv/
+env/
 ENV/
-env.bak/
-venv.bak/
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Packaging
+pip-wheel-metadata/
+*.egg-info/
+dist/
+build/
+
 
 # Spyder project settings
 .spyderproject
@@ -213,3 +224,7 @@ data/interim/*
 data/canonical/*
 data/external/*
 data/*
+
+Lib/
+site-packages/
+venv/
