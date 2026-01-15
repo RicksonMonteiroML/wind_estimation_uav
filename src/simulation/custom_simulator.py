@@ -4,7 +4,7 @@ from typing import Dict
 from simulation.simulator_base import SimulatorBase
 from physics.rigid_body import RigidBody6DOF
 from physics.aerodynamics import AerodynamicModel
-from physics.wind_model import WindModel
+from physics.wind_model.base_wind_model import WindModel
 from physics.frames import quat_to_rotmat
 from sensors.imu import IMUSensor
 from sensors.state import StateSensor
