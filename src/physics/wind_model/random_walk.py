@@ -2,7 +2,7 @@ import numpy as np
 from typing import Optional
 
 from utils.types import Vector3
-from physics.wind_model import WindModel
+from physics.wind_model.base_wind_model import WindModel
 
 
 class RandomWalkWind(WindModel):

@@ -228,3 +228,4 @@ data/*
 Lib/
 site-packages/
 venv/
+*.pkl
