@@ -1,27 +1,26 @@
-
 class Registry:
+    trajectories = {}
+    controllers = {}
     drones = {}
     winds = {}
-    controllers = {}
-    trajectories = {}
     estimators = {}
 
-    @classmethod
-    def register_drone(cls, name, constructor):
-        cls.drones[name] = constructor
+    @staticmethod
+    def register_trajectory(name, cls):
+        Registry.trajectories[name] = cls
 
-    @classmethod
-    def register_wind(cls, name, constructor):
-        cls.winds[name] = constructor
+    @staticmethod
+    def register_controller(name, cls):
+        Registry.controllers[name] = cls
 
-    @classmethod
-    def register_controller(cls, name, constructor):
-        cls.controllers[name] = constructor
+    @staticmethod
+    def register_drone(name, cls):
+        Registry.drones[name] = cls
 
-    @classmethod
-    def register_trajectory(cls, name, constructor):
-        cls.trajectories[name] = constructor
+    @staticmethod
+    def register_wind(name, cls):
+        Registry.winds[name] = cls
 
-    @classmethod
-    def register_estimator(cls, name, constructor):
-        cls.estimators[name] = constructor
+    @staticmethod
+    def register_estimator(name, cls):
+        Registry.estimators[name] = cls

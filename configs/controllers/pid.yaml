@@ -1,0 +1,4 @@
+type: pid_position
+params:
+  kp: [2.0, 2.0, 3.0]
+  kd: [0.6, 0.6, 0.9]

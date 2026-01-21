@@ -1,0 +1,5 @@
+type: quadrotor_simple
+params:
+  mass: 1.0
+  inertia: [1.0, 1.0, 1.0]
+  drag_coeffs: [0.1, 0.1, 0.2]

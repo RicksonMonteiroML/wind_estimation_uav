@@ -1,6 +1,15 @@
 import yaml
 from core.registry import Registry
-from core.timebase import TimeBase
+
+
+def load_module(file_path: str, registry: dict):
+    with open(file_path, "r") as f:
+        data = yaml.safe_load(f)
+
+    module_type = data["type"]
+    params = data.get("params", {})
+
+    return registry[module_type](params)
 
 
 class SimulationEngine:
@@ -8,36 +17,26 @@ class SimulationEngine:
     def __init__(self, config):
         self.config = config
 
-        # --- Drone ---
-        self.drone = Registry.drones[config.drone.model](config.drone)
+        # --- Load modules ---
+        self.drone = load_module(
+            config.drone.file, Registry.drones
+        )
 
-        # --- Wind ---
-        self.wind = Registry.winds[config.wind.model](config.wind)
+        self.wind = load_module(
+            config.wind.file, Registry.winds
+        )
 
-        # --- Trajectory (NEW) ---
-        with open(config.trajectory.file, "r") as f:
-            traj_data = yaml.safe_load(f)
+        self.trajectory = load_module(
+            config.trajectory.file, Registry.trajectories
+        )
 
-        traj_type = traj_data["type"]
-        traj_params = traj_data.get("params", {})
+        self.controller = load_module(
+            config.control.file, Registry.controllers
+        )
 
-        self.trajectory = Registry.trajectories[traj_type](traj_params)
+        self.estimator = load_module(
+            config.estimator.file, Registry.estimators
+        )
 
-        # --- Controller ---
-        self.controller = Registry.controllers[config.control.strategy](config.control)
-
-        # --- Estimator ---
-        self.estimator = Registry.estimators[config.estimator.type](config.estimator)
-
-        self.time = TimeBase(config.dt, config.duration)
-
-    def run(self):
-        for t in self.time:
-            ref = self.trajectory.reference(t)
-            u = self.controller.compute(ref, self.drone.state)
-            w = self.wind.value(t)
-
-            self.drone.step(u, w)
-
-            measurements = self.drone.sensors.read()
-            self.estimator.step(u, measurements)
+        self.dt = config.dt
+        self.duration = config.duration

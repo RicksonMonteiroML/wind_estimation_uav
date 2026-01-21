@@ -1,12 +1,5 @@
 import yaml
-from core.experiment_config import (
-    ExperimentConfig,
-    DroneConfig,
-    WindConfig,
-    ControlConfig,
-    TrajectoryConfig,
-    EstimatorConfig,
-)
+from core.experiment_config import ExperimentConfig, ModuleConfig
 
 
 class ExperimentLoader:
@@ -16,14 +9,16 @@ class ExperimentLoader:
         with open(path, "r") as f:
             data = yaml.safe_load(f)
 
-        return ExperimentConfig(
-            name=data["experiment"]["name"],
-            duration=data["experiment"]["duration"],
-            dt=data["experiment"]["dt"],
+        exp = data["experiment"]
 
-            drone=DroneConfig(**data["drone"]),
-            wind=WindConfig(**data["wind"]),
-            control=ControlConfig(**data["control"]),
-            trajectory=TrajectoryConfig(**data["trajectory"]),
-            estimator=EstimatorConfig(**data["estimator"]),
+        return ExperimentConfig(
+            name=exp["name"],
+            duration=exp["duration"],
+            dt=exp["dt"],
+
+            trajectory=ModuleConfig(**data["trajectory"]),
+            control=ModuleConfig(**data["control"]),
+            drone=ModuleConfig(**data["drone"]),
+            wind=ModuleConfig(**data["wind"]),
+            estimator=ModuleConfig(**data["estimator"]),
         )
