@@ -1,0 +1,7 @@
+type: hypotrochoid
+params:
+  R: 2.0
+  r: 0.8
+  d: 0.6
+  omega: 1.0
+  z: 1.0

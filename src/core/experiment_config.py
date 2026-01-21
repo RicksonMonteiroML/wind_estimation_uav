@@ -24,9 +24,7 @@ class ControlConfig:
 
 @dataclass
 class TrajectoryConfig:
-    type: str
-    params: Dict[str, Any]
-
+    file: str
 
 @dataclass
 class EstimatorConfig:

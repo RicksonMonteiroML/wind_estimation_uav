@@ -1,0 +1,29 @@
+experiment:
+  name: wind_estimation_hypotrochoid
+  duration: 40.0
+  dt: 0.01
+
+drone:
+  model: quadrotor_simple
+  mass: 1.0
+  inertia: [1.0, 1.0, 1.0]
+  drag_coeffs: [0.1, 0.1, 0.2]
+
+wind:
+  model: constant
+  value: [1.0, 0.0, 0.0]
+
+trajectory:
+  file: configs/trajectories/hypotrochoid_medium.yaml
+
+control:
+  strategy: pid_position
+  params:
+    kp: [2.0, 2.0, 3.0]
+    kd: [0.6, 0.6, 0.9]
+
+estimator:
+  type: ekf_wind
+  params:
+    Q: [0.02, 0.02, 0.05, 0.05, 0.05]
+    R: [0.05, 0.05, 0.05]

@@ -1,5 +1,12 @@
 import yaml
-from core.experiment_config import ExperimentConfig, DroneConfig, WindConfig, ControlConfig, TrajectoryConfig, EstimatorConfig
+from core.experiment_config import (
+    ExperimentConfig,
+    DroneConfig,
+    WindConfig,
+    ControlConfig,
+    TrajectoryConfig,
+    EstimatorConfig,
+)
 
 
 class ExperimentLoader:
